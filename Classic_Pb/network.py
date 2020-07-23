@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List, Callable, TypeVar, Tuple
 from functools import reduce
-from layer import Layer
+from layers import Layer
 from util import sigmoid, derivative_sigmoid
 
 T = TypeVar('T') # output type of interpretation of neural network
@@ -47,8 +47,7 @@ class Network:
 
     # train() uses the results of outputs() run over many inputs and compared
     # against expecteds to feed backpropagate() and update_weights()
-    def train(self, inputs: List[List[float]], expecteds: List[List[float]]) ->
-         None:
+    def train(self, inputs: List[List[float]], expecteds: List[List[float]]) -> None:
         for location, xs in enumerate(inputs):
             ys: List[float] = expecteds[location]
             outs: List[float] = self.outputs(xs)
@@ -58,8 +57,7 @@ class Network:
     # for generalized results that require classification
     # this function will return the correct number of trials
     # and the percentage correct out of the total
-    def validate(self, inputs: List[List[float]], expecteds: List[T], interpret_
-         output: Callable[[List[float]], T]) -> Tuple[int, int, float]:
+    def validate(self, inputs: List[List[float]], expecteds: List[T], interpret_output: Callable[[List[float]], T]) -> Tuple[int, int, float]:
         correct: int = 0
         for input, expected in zip(inputs, expecteds):
             result: T = interpret_output(self.outputs(input))
