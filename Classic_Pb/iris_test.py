@@ -26,3 +26,11 @@ if __name__ == "__main__":
 
     iris_network: Network = Network([4, 6, 3], 0.3)
 
+def iris_interpret_output(output: List[float]) -> str:
+    if max(output) == output[0]:
+        return "Iris-setosa"
+    elif max(output) == output[1]:
+        return "Iris-versicolor"
+    else:
+        return "Iris-virginica"
+
